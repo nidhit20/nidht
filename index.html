@@ -1,53 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SRM University</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-    }
-    .header {
-      background-color: #007bff;
-      color: #fff;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 20px;
-    }
-    h1 {
-      font-size: 36px;
-      text-transform: uppercase;
-    }
-    p {
-      font-size: 18px;
-    }
-    .hello-nidhi {
-      font-size: 48px;
-      color: #007bff;
-      text-align: center;
-      margin-top: 50px;
-    }
-  </style>
-</head>
-<body>
+import requests
+import os
 
-  <header class="header">
-    <h1>SRM University</h1>
-  </header>
+def download_image(url, save_path):
+    # Send a GET request to the URL to get the image data
+    response = requests.get(url)
+    if response.status_code == 200:
+        # Save the image to the specified path
+        with open(save_path, 'wb') as file:
+            file.write(response.content)
+        print("Image saved successfully to:", save_path)
+    else:
+        print("Failed to download image. Status code:", response.status_code)
 
-  <div class="container">
-    <p>Welcome to our beautiful website!</p>
-    <div class="hello-nidhi">HeLLO NIDHI</div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Mauris euismod risus in luctus fermentum. Phasellus fermentum velit ac nisi aliquam, at blandit mauris volutpat.</p>
-  </div>
+def main():
+    # Desktop path
+    desktop_path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
-</body>
-</html>
+    # URL of the image
+    image_url = "https://source.unsplash.com/random/"
+
+    # File path to save the image
+    file_name = "random_image.jpg"
+    save_path = os.path.join(desktop_path, file_name)
+
+    # Download and save the image
+    download_image(image_url, save_path)
+
+if __name__ == "__main__":
+    main()
+
+     
+      
